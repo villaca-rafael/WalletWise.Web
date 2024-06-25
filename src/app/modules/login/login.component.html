@@ -1,1 +1,116 @@
-<p>login works!</p>
+<div class="flex h-screen">
+  <section
+    class="hidden bg-white w-1/2 lg:flex lg:items-center lg:justify-center"
+  >
+    <img src="assets/images/logo.svg" alt="Logo Wallet Wise" />
+  </section>
+
+  <section
+    class="bg-[#000638] flex justify-center items-center w-screen lg:w-1/2"
+  >
+    <form
+      [formGroup]="usuarioLoginForm"
+      class="flex flex-col gap-7 w-screen max-w-lg px-5"
+    >
+      <div class="flex flex-col gap-5 text-white font-semibold">
+        <h1 class="text-2xl">Bem-vindo a Wallet Wise</h1>
+        <p class="text-base">Faça login para acessar sua conta</p>
+      </div>
+
+      <div class="flex flex-col gap-7">
+        <span class="form-group">
+          <label class="label">Usuário</label>
+          <input
+            [ngClass]="{
+              'input-error':
+                usuarioLoginForm.controls.username.errors &&
+                usuarioLoginForm.controls.username.touched
+            }"
+            formControlName="username"
+            class="input"
+            maxlength="30"
+          />
+          <i class="bx bx-x input-reset" (click)="clearInput($event)"></i>
+          <span
+            *ngIf="
+              usuarioLoginForm.controls.username.errors &&
+              usuarioLoginForm.controls.username.touched
+            "
+            class="message-error"
+          >
+            <ng-container
+              *ngIf="usuarioLoginForm.controls.username.hasError('required')"
+              >O campo usuário é obrigatório.</ng-container
+            >
+            <ng-container
+              *ngIf="
+                !usuarioLoginForm.controls.username.hasError('required') &&
+                usuarioLoginForm.controls.username.hasError('minlength')
+              "
+              >O campo usuário deve ter, no mínimo, 3 caracteres.</ng-container
+            >
+            <ng-container
+              *ngIf="
+                !usuarioLoginForm.controls.username.hasError('required') &&
+                !usuarioLoginForm.controls.username.hasError('minlength') &&
+                usuarioLoginForm.controls.username.hasError('nowhitespace')
+              "
+              >O campo usuário não pode conter espaços.</ng-container
+            >
+          </span>
+        </span>
+
+        <span class="form-group">
+          <label class="label">Senha</label>
+          <input
+            [ngClass]="{
+              'input-error':
+                usuarioLoginForm.controls.senha.errors &&
+                usuarioLoginForm.controls.senha.touched
+            }"
+            formControlName="senha"
+            class="input"
+            type="password"
+            maxlength="40"
+          />
+          <i class="bx bx-x input-reset" (click)="clearInput($event)"></i>
+          <i *ngIf="show; else noShow" class='bx bxs-show show-password' (click)="showPassword($event)"></i>
+          <ng-template #noShow>
+            <i class='bx bxs-hide show-password' (click)="showPassword($event)"></i>
+          </ng-template>
+          <span
+            *ngIf="
+              usuarioLoginForm.controls.senha.errors &&
+              usuarioLoginForm.controls.senha.touched
+            "
+            class="message-error"
+          >
+            <ng-container
+              *ngIf="usuarioLoginForm.controls.senha.getError('required')"
+              >O campo senha é obrigatório.</ng-container
+            >
+            <ng-container
+              *ngIf="usuarioLoginForm.controls.senha.getError('minlength')"
+              >O campo senha deve ter, no mínimo, 6 caracteres.</ng-container
+            >
+          </span>
+        </span>
+      </div>
+
+      <button
+        (click)="login()"
+        class="btn-primary self-center mt-3"
+        [class.isDisabled]="!usuarioLoginForm.valid"
+      >
+        Entrar
+      </button>
+
+      <p class="footer-form">
+        Ainda não tem uma conta?
+        <span (click)="goRegister()" class="footer-form-link"
+          >Cadastre-se agora!</span
+        >
+      </p>
+    </form>
+  </section>
+</div>

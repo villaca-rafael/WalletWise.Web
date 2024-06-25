@@ -15,7 +15,8 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 4000
+      timeOut: 4000,
+      preventDuplicates: true
     })
   ],
   providers: [],

@@ -7,14 +7,64 @@
   font-family: "Montserrat", sans-serif
 
 .toast-top-right
-  @apply fixed p-5 right-0
+  @apply fixed p-5 top-0 right-0
 
 .toast-success
-  @apply bg-green-500 text-[#FFFFFF] font-medium rounded-md text-center p-5
+  @apply bg-[#6891FF] text-[#FFFFFF] font-medium rounded-md text-center p-5
+  background-image: url(assets/images/check.svg)
+  background-repeat: no-repeat
+  background-position: -30px
+  background-origin: content-box
+  padding-left: 40px
 
 .toast-error
   @apply bg-red-500 text-[#FFFFFF] font-medium rounded-md text-center p-5
+  background-image: url(assets/images/x.svg)
+  background-repeat: no-repeat
+  background-position: -30px
+  background-origin: content-box
+  padding-left: 40px
 
 .toast-warning
   @apply bg-yellow-500 text-[#FFFFFF] font-medium rounded-md text-center p-5
+  background-image: url(assets/images/warning.svg)
+  background-repeat: no-repeat
+  background-position: -30px
+  background-origin: content-box
+  padding-left: 40px
+
+.form-group
+  @apply flex flex-col gap-1 relative
+
+.label
+  @apply font-medium text-xs text-white
+
+.input
+  @apply py-2 px-3 rounded outline-none outline-0 flex items-center font-medium border-2 border-transparent transition-all duration-300 hover:border-slate-800 focus:border-slate-950
+
+.input-error
+  border-color: #ef4444 !important
+
+.message-error
+  @apply absolute -bottom-5 text-red-500 text-xs font-semibold
+
+.input-reset
+  @apply absolute right-3 top-7 text-xl cursor-pointer transition-all duration-300 hover:text-red-500
+
+.show-password
+  @apply absolute right-9 top-7 text-xl cursor-pointer transition-all duration-300 hover:text-[#6891FF]
+
+.isDisabled
+  @apply pointer-events-none opacity-70
+  background-color: #e0e0e0 !important
+  color: #9e9e9e !important
+
+.btn-primary
+  @apply py-2 px-8 font-semibold rounded-3xl outline-none outline-0 text-white bg-[#6891FF] transition-all duration-300 hover:bg-white hover:text-[#6891FF] focus:bg-slate-950 focus:text-white active:bg-slate-950 active:text-white
+
+.footer-form
+  @apply text-center font-medium text-xs text-white
+
+.footer-form-link
+  @apply text-[#6891FF] cursor-pointer duration-300 transition-all hover:text-white
 
