@@ -30,7 +30,7 @@
             class="input"
             maxlength="30"
           />
-          <i class="bx bx-x input-reset" (click)="clearInput($event)"></i>
+          <i class="bx bx-x input-reset" (click)="utilService.clearInput($event, usuarioLoginForm)"></i>
           <span
             *ngIf="
               usuarioLoginForm.controls.username.errors &&
@@ -73,7 +73,7 @@
             type="password"
             maxlength="40"
           />
-          <i class="bx bx-x input-reset" (click)="clearInput($event)"></i>
+          <i class="bx bx-x input-reset" (click)="utilService.clearInput($event, usuarioLoginForm)"></i>
           <i *ngIf="show; else noShow" class='bx bxs-show show-password' (click)="showPassword($event)"></i>
           <ng-template #noShow>
             <i class='bx bxs-hide show-password' (click)="showPassword($event)"></i>

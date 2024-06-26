@@ -1,1 +1,312 @@
-<p>register works!</p>
+<div class="flex h-screen">
+  <section
+    class="hidden bg-white w-1/2 lg:flex lg:items-center lg:justify-center"
+  >
+    <img src="assets/images/logo.svg" alt="Logo Wallet Wise" />
+  </section>
+
+  <section
+    class="bg-[#000638] flex justify-center items-center w-screen lg:w-1/2"
+  >
+    <form
+      [formGroup]="usuarioNovoForm"
+      class="flex flex-col gap-8 w-screen max-w-lg px-5"
+    >
+      <div class="flex flex-col gap-8 text-white font-semibold">
+        <span class="flex items-center justify-center gap-4">
+          <p
+            class="step"
+            data-step="1"
+            [class.active]="currentStep == 1"
+            (click)="nextStep($event)"
+          >
+            ___
+          </p>
+          <p
+            class="step"
+            data-step="2"
+            [class.active]="currentStep == 2"
+            (click)="nextStep($event)"
+          >
+            ___
+          </p>
+          <p
+            class="step"
+            data-step="3"
+            [class.active]="currentStep == 3"
+            (click)="nextStep($event)"
+          >
+            ___
+          </p>
+          <p
+            class="step"
+            data-step="4"
+            [class.active]="currentStep == 4"
+            (click)="nextStep($event)"
+          >
+            ___
+          </p>
+        </span>
+      </div>
+
+      <ng-container [ngSwitch]="currentStep">
+        <div *ngSwitchCase="1" class="flex flex-col gap-6">
+          <p class="text-base text-white font-semibold">Qual é o seu nome?</p>
+          <div>
+            <span class="form-group">
+              <label class="label">Nome</label>
+              <input
+                [ngClass]="{
+                  'input-error':
+                    usuarioNovoForm.controls.nome.errors &&
+                    usuarioNovoForm.controls.nome.touched
+                }"
+                formControlName="nome"
+                class="input"
+                maxlength="40"
+                (keypress)="nextStepByKey($event)"
+              />
+              <i
+                class="bx bx-x input-reset"
+                (click)="utilService.clearInput($event, usuarioNovoForm)"
+              ></i>
+              <span
+                *ngIf="
+                  usuarioNovoForm.controls.nome.errors &&
+                  usuarioNovoForm.controls.nome.touched
+                "
+                class="message-error"
+              >
+                <ng-container
+                  *ngIf="usuarioNovoForm.controls.nome.getError('required')"
+                  >O campo nome é obrigatório.</ng-container
+                >
+                <ng-container
+                  *ngIf="
+                    !usuarioNovoForm.controls.nome.getError('required') &&
+                    usuarioNovoForm.controls.nome.getError('minlength')
+                  "
+                  >O campo nome deve conter, no mínimo, 3
+                  caracteres.</ng-container
+                >
+                <ng-container
+                  *ngIf="
+                    !usuarioNovoForm.controls.nome.getError('required') &&
+                    !usuarioNovoForm.controls.nome.getError('minlength') &&
+                    usuarioNovoForm.controls.nome.getError('texttrim')
+                  "
+                  >O campo nome não pode conter espaços ao redor.</ng-container
+                >
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div *ngSwitchCase="2" class="flex flex-col gap-6">
+          <p class="text-base text-white font-semibold">
+            Escolha um nome de usuário
+          </p>
+          <div>
+            <span class="form-group">
+              <label class="label">Usuário</label>
+              <input
+                [ngClass]="{
+                  'input-error':
+                    usuarioNovoForm.controls.username.errors &&
+                    usuarioNovoForm.controls.username.touched
+                }"
+                formControlName="username"
+                class="input"
+                maxlength="30"
+                (keypress)="nextStepByKey($event)"
+              />
+              <i
+                class="bx bx-x input-reset"
+                (click)="utilService.clearInput($event, usuarioNovoForm)"
+              ></i>
+              <span
+                *ngIf="
+                  usuarioNovoForm.controls.username.errors &&
+                  usuarioNovoForm.controls.username.touched
+                "
+                class="message-error"
+              >
+                <ng-container
+                  *ngIf="usuarioNovoForm.controls.username.getError('required')"
+                  >O campo usuário é obrigatório.</ng-container
+                >
+                <ng-container
+                  *ngIf="
+                    !usuarioNovoForm.controls.username.getError('required') &&
+                    usuarioNovoForm.controls.username.getError('minlength')
+                  "
+                  >O campo usuário deve conter, no mínimo, 3
+                  caracteres.</ng-container
+                >
+                <ng-container
+                  *ngIf="
+                    !usuarioNovoForm.controls.username.getError('required') &&
+                    !usuarioNovoForm.controls.username.getError('minlength') &&
+                    usuarioNovoForm.controls.username.getError('nowhitespace')
+                  "
+                  >O campo usuário não pode conter espaços.</ng-container
+                >
+              </span>
+            </span>
+          </div>
+        </div>
+        <div *ngSwitchCase="3" class="flex flex-col gap-6">
+          <p class="text-base text-white font-semibold">Qual é o seu e-mail?</p>
+          <div>
+            <span class="form-group">
+              <label class="label">E-mail</label>
+              <input
+                [ngClass]="{
+                  'input-error':
+                    usuarioNovoForm.controls.email.errors &&
+                    usuarioNovoForm.controls.email.touched
+                }"
+                formControlName="email"
+                class="input"
+                maxlength="80"
+                (keypress)="nextStepByKey($event)"
+              />
+              <i
+                class="bx bx-x input-reset"
+                (click)="utilService.clearInput($event, usuarioNovoForm)"
+              ></i>
+              <span
+                *ngIf="
+                  usuarioNovoForm.controls.email.errors &&
+                  usuarioNovoForm.controls.email.touched
+                "
+                class="message-error"
+              >
+                <ng-container
+                  *ngIf="usuarioNovoForm.controls.email.getError('required')"
+                  >O campo e-mail é obrigatório.</ng-container
+                >
+                <ng-container
+                  *ngIf="
+                    !usuarioNovoForm.controls.email.getError('required') &&
+                    usuarioNovoForm.controls.email.getError('email')
+                  "
+                  >O e-mail fornecido é inválido.</ng-container
+                >
+              </span>
+            </span>
+          </div>
+        </div>
+        <div *ngSwitchCase="4" class="flex flex-col gap-6">
+          <p class="text-base text-white font-semibold">Escolha uma senha:</p>
+          <div class="flex flex-col gap-7">
+            <span class="form-group">
+              <label class="label">Senha</label>
+              <input
+                [ngClass]="{
+                  'input-error':
+                    usuarioNovoForm.controls.senha.errors &&
+                    usuarioNovoForm.controls.senha.touched
+                }"
+                formControlName="senha"
+                class="input"
+                maxlength="40"
+                type="password"
+              />
+              <i
+                class="bx bx-x input-reset"
+                (click)="utilService.clearInput($event, usuarioNovoForm)"
+              ></i>
+              <i
+                *ngIf="show; else noShow"
+                class="bx bxs-show show-password"
+                (click)="showPassword($event)"
+              ></i>
+              <ng-template #noShow>
+                <i
+                  class="bx bxs-hide show-password"
+                  (click)="showPassword($event)"
+                ></i>
+              </ng-template>
+              <span
+                *ngIf="
+                  usuarioNovoForm.controls.senha.errors &&
+                  usuarioNovoForm.controls.senha.touched
+                "
+                class="message-error"
+              >
+                <ng-container
+                  *ngIf="usuarioNovoForm.controls.senha.getError('required')"
+                  >O campo senha é obrigatório.</ng-container
+                >
+                <ng-container
+                  *ngIf="usuarioNovoForm.controls.senha.getError('minlength')"
+                  >O campo senha deve conter, no mínimo, 6
+                  caracteres.</ng-container
+                >
+              </span>
+            </span>
+
+            <span class="form-group">
+              <label class="label">Confirme sua senha</label>
+              <input
+                [ngClass]="{
+                  'input-error':
+                    usuarioNovoForm.controls.confirmacaoSenha.errors &&
+                    usuarioNovoForm.controls.confirmacaoSenha.touched
+                }"
+                formControlName="confirmacaoSenha"
+                class="input"
+                maxlength="30"
+                type="password"
+              />
+              <i
+                class="bx bx-x input-reset"
+                (click)="utilService.clearInput($event, usuarioNovoForm)"
+              ></i>
+              <span
+                *ngIf="
+                  usuarioNovoForm.controls.confirmacaoSenha.errors &&
+                  usuarioNovoForm.controls.confirmacaoSenha.touched
+                "
+                class="message-error"
+              >
+                <ng-container
+                  *ngIf="
+                    usuarioNovoForm.controls.confirmacaoSenha.getError(
+                      'required'
+                    )
+                  "
+                  >O campo confirmação senha é obrigatório.</ng-container
+                >
+                <ng-container
+                  *ngIf="
+                    !usuarioNovoForm.controls.confirmacaoSenha.getError(
+                      'required'
+                    ) &&
+                    usuarioNovoForm.controls.confirmacaoSenha.getError(
+                      'passwordequal'
+                    )
+                  "
+                  >As senhas não coincidem.</ng-container
+                >
+              </span>
+            </span>
+          </div>
+          <button
+            (click)="register()"
+            class="btn-primary self-center mt-3"
+            [class.isDisabled]="!usuarioNovoForm.valid"
+          >
+            Cadastrar
+          </button>
+        </div>
+      </ng-container>
+
+      <p class="footer-form">
+        Já possui uma conta?
+        <span (click)="goLogin()" class="footer-form-link">Entre agora!</span>
+      </p>
+    </form>
+  </section>
+</div>

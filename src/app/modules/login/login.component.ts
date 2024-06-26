@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { distinctUntilChanged } from 'rxjs';
 import { UsuarioLogin } from 'src/app/shared/models/usuario-login';
+import { UtilService } from 'src/app/shared/services/util.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit{
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    public utilService: UtilService
   ) {}
 
   ngOnInit(): void {
@@ -28,12 +30,6 @@ export class LoginComponent implements OnInit{
     ).subscribe(value =>
       this.usuarioLoginForm.controls.username.setValue(value?.toLowerCase() || null)
     )
-  }
-
-  clearInput(event: MouseEvent) {
-    let formGroup = (event.target as HTMLElement).parentNode
-    var formControlName = formGroup?.children.item(1)?.attributes.getNamedItem('formControlName')?.value;
-    this.usuarioLoginForm.get(`${formControlName}`)?.setValue(null);
   }
 
   showPassword(event: MouseEvent) {
